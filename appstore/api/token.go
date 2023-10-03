@@ -74,7 +74,7 @@ func (t *Token) Generate() error {
 	t.AuthKey = key
 
 	issuedAt := time.Now().Unix()
-	expiredAt := time.Now().Add(time.Duration(5) * time.Minute).Unix()
+	expiredAt := time.Now().Add(time.Duration(20) * time.Minute).Unix()
 	jwtToken := &jwt.Token{
 		Header: map[string]interface{}{
 			"alg": "ES256",
