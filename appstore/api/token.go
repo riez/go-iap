@@ -74,7 +74,7 @@ func (t *Token) Generate() error {
 	t.AuthKey = key
 
 	issuedAt := time.Now().Unix()
-	expiredAt := time.Now().Add(time.Duration(20) * time.Minute).Unix()
+	expiredAt := time.Now().Add(time.Duration(5) * time.Minute).Unix()
 	jwtToken := &jwt.Token{
 		Header: map[string]interface{}{
 			"alg": "ES256",
@@ -87,7 +87,6 @@ func (t *Token) Generate() error {
 			"iat":   issuedAt,
 			"exp":   expiredAt,
 			"aud":   "appstoreconnect-v1",
-			"nonce": uuid.New(),
 			"bid":   t.BundleID,
 		},
 		Method: jwt.SigningMethodES256,
