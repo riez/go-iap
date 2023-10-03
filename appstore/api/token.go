@@ -5,6 +5,7 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"errors"
+	"fmt"
 	"os"
 	"sync"
 	"time"
@@ -73,7 +74,7 @@ func (t *Token) Generate() error {
 	t.AuthKey = key
 
 	issuedAt := time.Now().Unix()
-	expiredAt := time.Now().Add(time.Duration(15) * time.Minute).Unix()
+	expiredAt := time.Now().Add(time.Duration(5) * time.Minute).Unix()
 	jwtToken := &jwt.Token{
 		Header: map[string]interface{}{
 			"alg": "ES256",
@@ -96,6 +97,7 @@ func (t *Token) Generate() error {
 	if err != nil {
 		return err
 	}
+    fmt.Printf("Token: %v", bearer)
 	t.ExpiredAt = expiredAt
 	t.Bearer = bearer
 
