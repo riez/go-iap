@@ -72,7 +72,6 @@ func (t *Token) Generate() error {
 	}
 	t.AuthKey = key
 
-	issuedAt := time.Now().Unix()
 	expiredAt := time.Now().Add(time.Duration(5) * time.Minute).Unix()
 	jwtToken := &jwt.Token{
 		Header: map[string]interface{}{
@@ -83,7 +82,6 @@ func (t *Token) Generate() error {
 
 		Claims: jwt.MapClaims{
 			"iss":   t.Issuer,
-			"iat":   issuedAt,
 			"exp":   expiredAt,
 			"aud":   "appstoreconnect-v1",
 			"bid":   t.BundleID,
